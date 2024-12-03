@@ -20,8 +20,8 @@ public class FinancialPlanning implements Serializable{ //Planejamento financeir
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Double annualGoal; //meta anual
-	private Double monthlyGoal; //meta mensal
+	private Double annualGoal; //meta anual de economia
+	private Double monthlyGoal; //meta mensal de economia
 	
 	@OneToOne
 	@MapsId

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 
-public interface FinancialPlanningRepository extends JpaRepository<Long, FinancialPlanning> {
+public interface FinancialPlanningRepository extends JpaRepository<FinancialPlanning, Long> {
 
 }

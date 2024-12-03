@@ -29,11 +29,10 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(Long id, String name, Double monthlyIncome, FinancialPlanning financialPlanning) {
+	public User(Long id, String name, Double monthlyIncome) {
 		this.id = id;
 		this.name = name;
 		this.monthlyIncome = monthlyIncome;
-		this.financialPlanning = financialPlanning;
 	}
 
 	public Long getId() {
