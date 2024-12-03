@@ -30,7 +30,6 @@ public class Category implements Serializable{
 	}
 	
 	public Category(Long id, String name, Double predictedCategoryLimit) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.predictedCategoryLimit = predictedCategoryLimit;

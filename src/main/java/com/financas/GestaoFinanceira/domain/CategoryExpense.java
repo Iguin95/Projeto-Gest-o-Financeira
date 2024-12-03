@@ -20,6 +20,7 @@ public class CategoryExpense implements Serializable{
 	
 	private Integer quantity;
 	private Double price;
+	private Double total;
 	
 	public CategoryExpense() {
 	}
@@ -61,6 +62,18 @@ public class CategoryExpense implements Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+	
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+	
+	public Double getSubTotal() {
+		return price * quantity;
 	}
 
 	@Override
