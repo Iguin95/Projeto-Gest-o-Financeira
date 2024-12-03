@@ -22,7 +22,7 @@ public class Expense implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String description;
-	private Double value;
+	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; //despesa necessária
 	
@@ -35,7 +35,7 @@ public class Expense implements Serializable {
 	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
 		this.id = id;
 		this.description = description;
-		this.value = value;
+		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
 	}
@@ -57,11 +57,11 @@ public class Expense implements Serializable {
 	}
 
 	public Double getValue() {
-		return value;
+		return price;
 	}
 
 	public void setValue(Double value) {
-		this.value = value;
+		this.price = value;
 	}
 
 	public LocalDate getDate() {
