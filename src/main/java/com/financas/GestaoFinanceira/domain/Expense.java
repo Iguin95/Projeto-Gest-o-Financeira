@@ -2,14 +2,15 @@ package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,8 +27,8 @@ public class Expense implements Serializable {
 	private LocalDate date;
 	private Boolean necessaryExpense; //despesa necessária
 	
-	
-	List<Category> categories = new ArrayList<>();
+	@OneToMany(mappedBy = "id.expense")
+	Set<CategoryExpense> categories = new HashSet<>();
 	
 	public Expense() {
 	}
@@ -56,11 +57,11 @@ public class Expense implements Serializable {
 		this.description = description;
 	}
 
-	public Double getValue() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setValue(Double value) {
+	public void setPrice(Double value) {
 		this.price = value;
 	}
 
@@ -80,7 +81,7 @@ public class Expense implements Serializable {
 		this.necessaryExpense = necessaryExpense;
 	}
 
-	public List<Category> getCategories() {
+	public Set<CategoryExpense> getCategories() {
 		return categories;
 	}
 
