@@ -26,6 +26,7 @@ public class Expense implements Serializable {
 	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; //despesa necessária
+
 	
 	@OneToMany(mappedBy = "id.expense")
 	Set<CategoryExpense> categories = new HashSet<>();
@@ -81,8 +82,12 @@ public class Expense implements Serializable {
 		this.necessaryExpense = necessaryExpense;
 	}
 
-	public Set<CategoryExpense> getCategories() {
-		return categories;
+	public Set<Category> getCategories() {
+		Set<Category> category = new HashSet<>();
+		for(CategoryExpense x : categories) {
+			category.add(x.getExpense());
+		}
+		return category;
 	}
 
 	@Override
