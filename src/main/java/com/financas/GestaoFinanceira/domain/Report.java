@@ -1,12 +1,15 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,7 +23,10 @@ public class Report implements Serializable{
 	private Long id;
 	private Double totalExpenses; //gastos totais
 	private Double spendingByCategory; //gastos por categoria
-	private Double finalBalance; //saldo final
+	private Double finalBalance; //saldo final (salario - gastos totais)
+	
+	@OneToMany(mappedBy = "report")
+	List<CategoryExpense> expenses = new ArrayList<>();
 	
 	public Report() {
 	}
@@ -62,6 +68,18 @@ public class Report implements Serializable{
 
 	public void setFinalBalance(Double finalBalance) {
 		this.finalBalance = finalBalance;
+	}
+
+	public List<CategoryExpense> getExpenses() {
+		return expenses;
+	}
+	
+	public Double Total() {
+		double sum = 0.0;
+		for(CategoryExpense x : expenses) {
+			sum += x.getSubTotal();
+		}
+		return sum;
 	}
 
 	@Override

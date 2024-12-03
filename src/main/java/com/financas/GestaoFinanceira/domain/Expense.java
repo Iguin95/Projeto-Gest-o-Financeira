@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -26,6 +28,10 @@ public class Expense implements Serializable {
 	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; //despesa necessária
+	
+	@ManyToOne
+	@JoinColumn(name = "report_id")
+	private Report report;
 	
 	@OneToMany(mappedBy = "id.expense")
 	Set<CategoryExpense> expensesAndTheirCategories = new HashSet<>();
@@ -87,6 +93,14 @@ public class Expense implements Serializable {
 			category.add(x.getCategory());
 		}
 		return category;
+	}
+
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
 	}
 
 	@Override

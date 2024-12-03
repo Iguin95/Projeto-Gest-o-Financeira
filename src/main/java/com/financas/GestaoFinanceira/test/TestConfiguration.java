@@ -12,6 +12,7 @@ import com.financas.GestaoFinanceira.domain.Category;
 import com.financas.GestaoFinanceira.domain.CategoryExpense;
 import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
+import com.financas.GestaoFinanceira.domain.Report;
 import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
@@ -50,6 +51,8 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat1 = new Category(null, "Informática", 500.00);
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		
+		Report r1 = new Report(null, null, null, null);
 		
 		Expense ex1 = new Expense(null, "Teclado", 400.00, LocalDate.parse("2019-06-20"), false);
 		Expense ex2 = new Expense(null, "Banana", 4.00, LocalDate.parse("2019-07-22"), true);
