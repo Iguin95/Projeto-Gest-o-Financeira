@@ -12,8 +12,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_FinancialPlanning")
-public class FinancialPlanning implements Serializable{ //Planejamento financeiro
+@Table(name = "tb_FinancialPlanning") //Planejamento financeiro
+public class FinancialPlanning implements Serializable{ 
 
 	private static final long serialVersionUID = 1L;
 	
