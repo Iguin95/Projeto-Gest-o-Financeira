@@ -18,6 +18,7 @@ import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
 import com.financas.GestaoFinanceira.repositories.ExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
+import com.financas.GestaoFinanceira.repositories.ReportRepository;
 import com.financas.GestaoFinanceira.repositories.UserRepository;
 
 @Configuration
@@ -39,6 +40,9 @@ public class TestConfiguration implements CommandLineRunner {
 	@Autowired
 	CategoryExpenseRepository categoryExpenseRepository;
 	
+	@Autowired
+	ReportRepository reportRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -52,8 +56,6 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		
-		Report r1 = new Report(null, null, null, null);
-		
 		Expense ex1 = new Expense(null, "Teclado", 400.00, LocalDate.parse("2019-06-20"), false);
 		Expense ex2 = new Expense(null, "Banana", 4.00, LocalDate.parse("2019-07-22"), true);
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2));
@@ -63,7 +65,9 @@ public class TestConfiguration implements CommandLineRunner {
 		user1.setFinancialPlanning(fp);
 		userRepository.save(user1);
 		categoryExpenseRepository.saveAll(Arrays.asList(ce1));
-
+		
+		Report r1 = new Report(null, user1);
+		reportRepository.save(r1);
 		
 	}
 

@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,21 +23,20 @@ public class Report implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Double totalExpenses; //gastos totais
-	private Double spendingByCategory; //gastos por categoria
-	private Double finalBalance; //saldo final (salario - gastos totais)
 	
 	@OneToMany(mappedBy = "report")
 	List<CategoryExpense> expenses = new ArrayList<>();
 	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	public Report() {
 	}
 
-	public Report(Long id, Double totalExpenses, Double spendingByCategory, Double finalBalance) {
+	public Report(Long id, User user) {
 		this.id = id;
-		this.totalExpenses = totalExpenses;
-		this.spendingByCategory = spendingByCategory;
-		this.finalBalance = finalBalance;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -46,40 +47,37 @@ public class Report implements Serializable{
 		this.id = id;
 	}
 
-	public Double getTotalExpenses() {
-		return totalExpenses;
+	public User getUser() {
+		return user;
 	}
 
-	public void setTotalExpenses(Double totalExpenses) {
-		this.totalExpenses = totalExpenses;
-	}
-
-	public Double getSpendingByCategory() {
-		return spendingByCategory;
-	}
-
-	public void setSpendingByCategory(Double spendingByCategory) {
-		this.spendingByCategory = spendingByCategory;
-	}
-
-	public Double getFinalBalance() {
-		return finalBalance;
-	}
-
-	public void setFinalBalance(Double finalBalance) {
-		this.finalBalance = finalBalance;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<CategoryExpense> getExpenses() {
 		return expenses;
 	}
 	
-	public Double Total() {
+	public List<Double> getSpendingByCategory() { //gastos por categoria
+		List<Double> category = new ArrayList<>();
+		//para cada objeto x do tipo CategoryExpense contido na minha lista expenses, faça...
+		for(CategoryExpense x : expenses) { 
+			category.add(x.getSubTotal());
+		}
+		return category;
+	}
+	
+	public Double getTotalExpenses() { //gastos totais
 		double sum = 0.0;
 		for(CategoryExpense x : expenses) {
 			sum += x.getSubTotal();
 		}
 		return sum;
+	}
+	
+	public Double getFinalBalance() { //saldo final (salario - gastos totais)
+		return getTotalExpenses() - getUser().getMonthlyIncome();
 	}
 
 	@Override

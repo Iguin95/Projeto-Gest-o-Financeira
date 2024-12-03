@@ -1,6 +1,8 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,6 +29,9 @@ public class FinancialPlanning implements Serializable{
 	@OneToOne
 	@MapsId
 	private User user;
+	
+	@OneToMany(mappedBy = "financialPlanning")
+	List<Expense> expenses = new ArrayList<>();
 	
 	public FinancialPlanning() {
 	}
@@ -67,6 +73,10 @@ public class FinancialPlanning implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
 	}
 
 	@Override

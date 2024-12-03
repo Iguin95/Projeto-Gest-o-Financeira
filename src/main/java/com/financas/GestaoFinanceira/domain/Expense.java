@@ -30,11 +30,11 @@ public class Expense implements Serializable {
 	private Boolean necessaryExpense; //despesa necessária
 	
 	@ManyToOne
-	@JoinColumn(name = "report_id")
-	private Report report;
+	@JoinColumn(name = "financialPlanning_id")
+	private FinancialPlanning financialPlanning;
 	
 	@OneToMany(mappedBy = "id.expense")
-	Set<CategoryExpense> expensesAndTheirCategories = new HashSet<>();
+	Set<CategoryExpense> expensesAndTheirCategories = new HashSet<>(); //despesas e suas categorias
 	
 	public Expense() {
 	}
@@ -95,12 +95,16 @@ public class Expense implements Serializable {
 		return category;
 	}
 
-	public Report getReport() {
-		return report;
+	public FinancialPlanning getFinancialPlanning() {
+		return financialPlanning;
 	}
 
-	public void setReport(Report report) {
-		this.report = report;
+	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
+		this.financialPlanning = financialPlanning;
+	}
+
+	public Set<CategoryExpense> getExpensesAndTheirCategories() {
+		return expensesAndTheirCategories;
 	}
 
 	@Override

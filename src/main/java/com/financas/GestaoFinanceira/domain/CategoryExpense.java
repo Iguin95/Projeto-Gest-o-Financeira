@@ -7,6 +7,8 @@ import com.financas.GestaoFinanceira.domain.pk.CategoryExpensePK;
 
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +19,10 @@ public class CategoryExpense implements Serializable{
 	
 	@EmbeddedId
 	private CategoryExpensePK id = new CategoryExpensePK();
+	
+	@ManyToOne
+	@JoinColumn(name = "report_id")
+	private Report report;
 	
 	private Integer quantity;
 	private Double price;
@@ -70,6 +76,14 @@ public class CategoryExpense implements Serializable{
 
 	public void setTotal(Double total) {
 		this.total = total;
+	}
+	
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
 	}
 	
 	public Double getSubTotal() {
