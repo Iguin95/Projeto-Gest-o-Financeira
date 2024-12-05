@@ -68,10 +68,9 @@ public class TestConfiguration implements CommandLineRunner {
 		CategoryExpense ce1 = new CategoryExpense(cat2, ex2, 2, ex2.getPrice());
 		CategoryExpense ce2 = new CategoryExpense(cat1, ex1, 5, ex1.getPrice());
 		
-		
 		categoryExpenseRepository.saveAll(Arrays.asList(ce1, ce2));
 		
-		Report r1 = new Report(null, user1);
+		Report r1 = new Report(null, user2, fp1);
 		reportRepository.save(r1);
 		
 	}

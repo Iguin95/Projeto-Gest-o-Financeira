@@ -10,35 +10,37 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_report")
-public class Report implements Serializable{
+public class Report implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
-	@JoinColumn(name = "financialPlanning_id")
-	private FinancialPlanning financialPlanning;
-	
+
+	@ManyToMany
+	@JoinTable(name = "tb_final_report", joinColumns = @JoinColumn(name = "report_id"), inverseJoinColumns = @JoinColumn(name = "financialPlanning_id"))
+	List<FinancialPlanning> listFinancialPlanning = new ArrayList<>();
+
 	@OneToMany(mappedBy = "report")
 	List<CategoryExpense> expenses = new ArrayList<>();
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	public Report() {
 	}
 
-	public Report(Long id, User user) {
+	public Report(Long id, User user, FinancialPlanning financialPlanning) {
 		this.id = id;
 		this.user = user;
 	}
@@ -59,28 +61,33 @@ public class Report implements Serializable{
 		this.user = user;
 	}
 
+	public List<FinancialPlanning> getListFinancialPlanning() {
+		return listFinancialPlanning;
+	}
+
 	public List<CategoryExpense> getExpenses() {
 		return expenses;
 	}
-	
-	public List<Double> getSpendingByCategory() { //gastos por categoria
+
+	public List<Double> getSpendingByCategory() { // gastos por categoria
 		List<Double> category = new ArrayList<>();
-		//para cada objeto x do tipo CategoryExpense contido na minha lista expenses, faça...
-		for(CategoryExpense x : expenses) { 
+		// para cada objeto x do tipo CategoryExpense contido na minha lista expenses,
+		// faça...
+		for (CategoryExpense x : expenses) {
 			category.add(x.getSubTotal());
 		}
 		return category;
 	}
-	
-	public Double getTotalExpenses() { //gastos totais
+
+	public Double getTotalExpenses() { // gastos totais
 		double sum = 0.0;
-		for(CategoryExpense x : expenses) {
+		for (CategoryExpense x : expenses) {
 			sum += x.getSubTotal();
 		}
 		return sum;
 	}
-	
-	public Double getFinalBalance() { //saldo final (salario - gastos totais)
+
+	public Double getFinalBalance() { // saldo final (salario - gastos totais)
 		return getTotalExpenses() - getUser().getMonthlyIncome();
 	}
 
