@@ -9,9 +9,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,13 +26,16 @@ public class FinancialPlanning implements Serializable{
 	private Double annualGoal; //meta anual de economia
 	private Double monthlyGoal; //meta mensal de economia
 	
-	@OneToOne
-	@MapsId
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 	
 	@OneToMany(mappedBy = "financialPlanning")
 	List<Report> reports = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "financialPlanning")
+	List<Expense> expenses = new ArrayList<>();
 	
 	public FinancialPlanning() {
 	}
@@ -74,8 +77,11 @@ public class FinancialPlanning implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}	
+
+	public List<Expense> getExpenses() {
+		return expenses;
 	}
-	
 
 	@Override
 	public int hashCode() {

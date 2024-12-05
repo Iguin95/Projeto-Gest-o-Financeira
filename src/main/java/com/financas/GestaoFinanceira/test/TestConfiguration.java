@@ -17,7 +17,7 @@ import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
 import com.financas.GestaoFinanceira.repositories.ExpenseRepository;
-//import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
+import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
 import com.financas.GestaoFinanceira.repositories.ReportRepository;
 import com.financas.GestaoFinanceira.repositories.UserRepository;
 
@@ -34,8 +34,8 @@ public class TestConfiguration implements CommandLineRunner {
 	@Autowired
 	ExpenseRepository expenseRepository;
 	
-	//@Autowired
-	//FinancialPlanningRepository financialPlanningRepository;
+	@Autowired
+	FinancialPlanningRepository financialPlanningRepository;
 	
 	@Autowired
 	CategoryExpenseRepository categoryExpenseRepository;
@@ -54,12 +54,14 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		
-		FinancialPlanning fp = new FinancialPlanning(null, 10000.00, 1000.00, user1);
-		user1.setFinancialPlanning(fp);
+		FinancialPlanning fp1 = new FinancialPlanning(null, 10000.00, 1000.00, user1);
+		financialPlanningRepository.saveAll(Arrays.asList(fp1));
+		
+		user1.getFinancialPlanning().add(fp1);
 		userRepository.saveAll(Arrays.asList(user1));
 		
-		Expense ex1 = new Expense(null, "Teclado", 400.00, LocalDate.parse("2019-06-20"), false, user1);
-		Expense ex2 = new Expense(null, "Banana", 4.00, LocalDate.parse("2019-07-22"), true, user1);
+		Expense ex1 = new Expense(null, "Teclado", 400.00, LocalDate.parse("2019-06-20"), false, fp1);
+		Expense ex2 = new Expense(null, "Banana", 4.00, LocalDate.parse("2019-07-22"), true, fp1);
 		
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2));
 		

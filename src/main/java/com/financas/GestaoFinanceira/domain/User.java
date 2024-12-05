@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,14 +24,11 @@ public class User implements Serializable {
 	private String name;
 	private Double monthlyIncome; //renda mensal
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private FinancialPlanning financialPlanning;
+	@OneToMany(mappedBy = "user")
+	List<FinancialPlanning> financialPlanning = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user")
 	List<Report> reports = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user")
-	private List<Expense> expenses = new ArrayList<>();
 	
 	public User() {
 	}
@@ -67,13 +62,9 @@ public class User implements Serializable {
 	public void setMonthlyIncome(Double monthlyIncome) {
 		this.monthlyIncome = monthlyIncome;
 	}
-
-	public FinancialPlanning getFinancialPlanning() {
+	
+	public List<FinancialPlanning> getFinancialPlanning() {
 		return financialPlanning;
-	}
-
-	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
-		this.financialPlanning = financialPlanning;
 	}
 
 	public List<Report> getReports() {
