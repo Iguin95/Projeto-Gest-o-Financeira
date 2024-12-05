@@ -30,8 +30,8 @@ public class Expense implements Serializable {
 	private Boolean necessaryExpense; //despesa necessária
 	
 	@ManyToOne
-	@JoinColumn(name = "financialPlanning_id")
-	private FinancialPlanning financialPlanning;
+	@JoinColumn(name = "User_id")
+	private User user;
 	
 	@OneToMany(mappedBy = "id.expense")
 	Set<CategoryExpense> expensesAndTheirCategories = new HashSet<>(); //despesas e suas categorias
@@ -39,12 +39,14 @@ public class Expense implements Serializable {
 	public Expense() {
 	}
 
-	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
+	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense,
+			User user) {
 		this.id = id;
 		this.description = description;
 		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -95,16 +97,16 @@ public class Expense implements Serializable {
 		return category;
 	}
 
-	public FinancialPlanning getFinancialPlanning() {
-		return financialPlanning;
-	}
-
-	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
-		this.financialPlanning = financialPlanning;
-	}
-
 	public Set<CategoryExpense> getExpensesAndTheirCategories() {
 		return expensesAndTheirCategories;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

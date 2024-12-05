@@ -31,7 +31,8 @@ public class FinancialPlanning implements Serializable{
 	private User user;
 	
 	@OneToMany(mappedBy = "financialPlanning")
-	List<Expense> expenses = new ArrayList<>();
+	List<Report> reports = new ArrayList<>();
+	
 	
 	public FinancialPlanning() {
 	}
@@ -74,10 +75,7 @@ public class FinancialPlanning implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public List<Expense> getExpenses() {
-		return expenses;
-	}
+	
 
 	@Override
 	public int hashCode() {

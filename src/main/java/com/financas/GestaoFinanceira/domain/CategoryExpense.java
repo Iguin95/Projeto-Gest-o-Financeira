@@ -20,13 +20,12 @@ public class CategoryExpense implements Serializable{
 	@EmbeddedId
 	private CategoryExpensePK id = new CategoryExpensePK();
 	
+	private Integer quantity;
+	private Double price;
+	
 	@ManyToOne
 	@JoinColumn(name = "report_id")
 	private Report report;
-	
-	private Integer quantity;
-	private Double price;
-	private Double total;
 	
 	public CategoryExpense() {
 	}
@@ -68,22 +67,6 @@ public class CategoryExpense implements Serializable{
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-	
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-	
-	public Report getReport() {
-		return report;
-	}
-
-	public void setReport(Report report) {
-		this.report = report;
 	}
 	
 	public Double getSubTotal() {

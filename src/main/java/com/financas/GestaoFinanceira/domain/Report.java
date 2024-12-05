@@ -24,6 +24,10 @@ public class Report implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ManyToOne
+	@JoinColumn(name = "financialPlanning_id")
+	private FinancialPlanning financialPlanning;
+	
 	@OneToMany(mappedBy = "report")
 	List<CategoryExpense> expenses = new ArrayList<>();
 	

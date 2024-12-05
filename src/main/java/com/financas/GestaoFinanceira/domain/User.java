@@ -32,6 +32,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	List<Report> reports = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "user")
+	private List<Expense> expenses = new ArrayList<>();
+	
 	public User() {
 	}
 
