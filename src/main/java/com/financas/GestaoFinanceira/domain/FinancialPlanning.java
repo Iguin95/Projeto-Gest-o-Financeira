@@ -1,18 +1,12 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,25 +21,13 @@ public class FinancialPlanning implements Serializable{
 	private Double annualGoal; //meta anual de economia
 	private Double monthlyGoal; //meta mensal de economia
 	
-	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@ManyToMany(mappedBy = "listFinancialPlanning")
-	List<Report> reports = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "financialPlanning")
-	List<Expense> expenses = new ArrayList<>();
-	
 	public FinancialPlanning() {
 	}
 
-	public FinancialPlanning(Long id, Double annualGoal, Double monthlyGoal, User user) {
+	public FinancialPlanning(Long id, Double annualGoal, Double monthlyGoal) {
 		this.id = id;
 		this.annualGoal = annualGoal;
 		this.monthlyGoal = monthlyGoal;
-		this.user = user;
 	}
 
 	public Long getId() {
@@ -70,18 +52,6 @@ public class FinancialPlanning implements Serializable{
 
 	public void setMonthlyGoal(Double monthlyGoal) {
 		this.monthlyGoal = monthlyGoal;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}	
-
-	public List<Expense> getExpenses() {
-		return expenses;
 	}
 
 	@Override

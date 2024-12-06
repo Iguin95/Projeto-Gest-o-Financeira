@@ -10,8 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,10 +26,6 @@ public class Expense implements Serializable {
 	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; //despesa necessária
-	
-	@ManyToOne
-	@JoinColumn(name = "financialPlanning_id")
-	private FinancialPlanning financialPlanning;
 
 	@OneToMany(mappedBy = "id.expense")
 	Set<CategoryExpense> expensesAndTheirCategories = new HashSet<>(); //despesas e suas categorias
@@ -39,14 +33,12 @@ public class Expense implements Serializable {
 	public Expense() {
 	}
 
-	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense,
-			FinancialPlanning financialPlanning) {
+	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
 		this.id = id;
 		this.description = description;
 		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
-		this.financialPlanning = financialPlanning;
 	}
 
 	public Long getId() {
@@ -87,14 +79,6 @@ public class Expense implements Serializable {
 
 	public void setNecessaryExpense(Boolean necessaryExpense) {
 		this.necessaryExpense = necessaryExpense;
-	}
-
-	public FinancialPlanning getFinancialPlanning() {
-		return financialPlanning;
-	}
-
-	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
-		this.financialPlanning = financialPlanning;
 	}
 
 	public Set<Category> getCategories() {

@@ -1,19 +1,12 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,23 +19,11 @@ public class Report implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToMany
-	@JoinTable(name = "tb_final_report", joinColumns = @JoinColumn(name = "report_id"), inverseJoinColumns = @JoinColumn(name = "financialPlanning_id"))
-	List<FinancialPlanning> listFinancialPlanning = new ArrayList<>();
-
-	@OneToMany(mappedBy = "report")
-	List<CategoryExpense> expenses = new ArrayList<>();
-
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
-
 	public Report() {
 	}
 
-	public Report(Long id, User user, FinancialPlanning financialPlanning) {
+	public Report(Long id) {
 		this.id = id;
-		this.user = user;
 	}
 
 	public Long getId() {
@@ -53,23 +34,7 @@ public class Report implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<FinancialPlanning> getListFinancialPlanning() {
-		return listFinancialPlanning;
-	}
-
-	public List<CategoryExpense> getExpenses() {
-		return expenses;
-	}
-
-	public List<Double> getSpendingByCategory() { // gastos por categoria
+	/*public List<Double> getSpendingByCategory() { // gastos por categoria
 		List<Double> category = new ArrayList<>();
 		// para cada objeto x do tipo CategoryExpense contido na minha lista expenses,
 		// faça...
@@ -89,7 +54,7 @@ public class Report implements Serializable {
 
 	public Double getFinalBalance() { // saldo final (salario - gastos totais)
 		return getTotalExpenses() - getUser().getMonthlyIncome();
-	}
+	}*/
 
 	@Override
 	public int hashCode() {
