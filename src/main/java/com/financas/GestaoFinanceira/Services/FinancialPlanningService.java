@@ -13,7 +13,7 @@ import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
 public class FinancialPlanningService {
 
 	@Autowired
-	FinancialPlanningRepository repository;
+	private FinancialPlanningRepository repository;
 	
 	public List<FinancialPlanning> findAll(){
 		return repository.findAll();

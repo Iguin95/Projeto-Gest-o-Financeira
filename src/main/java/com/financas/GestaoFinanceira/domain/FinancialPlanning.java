@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,14 +23,19 @@ public class FinancialPlanning implements Serializable{
 	private Double annualGoal; //meta anual de economia
 	private Double monthlyGoal; //meta mensal de economia
 	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
 	public FinancialPlanning() {
 	}
 
-	public FinancialPlanning(Long id, Double annualGoal, Double monthlyGoal) {
+	public FinancialPlanning(Long id, Double annualGoal, Double monthlyGoal, User user) {
 		this.id = id;
 		this.annualGoal = annualGoal;
 		this.monthlyGoal = monthlyGoal;
-	}
+		this.user = user;
+		}
 
 	public Long getId() {
 		return id;
@@ -52,6 +59,14 @@ public class FinancialPlanning implements Serializable{
 
 	public void setMonthlyGoal(Double monthlyGoal) {
 		this.monthlyGoal = monthlyGoal;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.financas.GestaoFinanceira.domain.Category;
+import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
@@ -49,6 +50,12 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat1 = new Category(null, "Informática", 500.00);
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		
+		FinancialPlanning fp1 = new FinancialPlanning(null, 20000.00, 1500.00, user1);
+		FinancialPlanning fp2 = new FinancialPlanning(null, 35000.00, 3600.00, user2);
+		FinancialPlanning fp3 = new FinancialPlanning(null, 15000.00, 1250.00, user1);
+		financialPlanningRepository.saveAll(Arrays.asList(fp1, fp2, fp3));
+		
 		
 		
 	}
