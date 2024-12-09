@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -59,6 +61,7 @@ public class Category implements Serializable{
 		this.predictedCategoryLimit = predictedCategoryLimit;
 	}
 
+	@JsonIgnore
 	public Set<CategoryExpense> getExpenses() {
 		return expenses;
 	}
