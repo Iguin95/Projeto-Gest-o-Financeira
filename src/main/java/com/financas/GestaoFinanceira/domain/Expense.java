@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -81,6 +83,7 @@ public class Expense implements Serializable {
 		this.necessaryExpense = necessaryExpense;
 	}
 
+	@JsonIgnore
 	public Set<Category> getCategories() {
 		Set<Category> category = new HashSet<>();
 		for(CategoryExpense x : expensesAndTheirCategories) {

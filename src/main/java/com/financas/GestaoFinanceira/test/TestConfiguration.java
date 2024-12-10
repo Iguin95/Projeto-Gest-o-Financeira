@@ -1,6 +1,8 @@
 package com.financas.GestaoFinanceira.test;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.financas.GestaoFinanceira.domain.Category;
+import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
@@ -21,6 +24,8 @@ import com.financas.GestaoFinanceira.repositories.UserRepository;
 @Configuration
 @Profile("test")
 public class TestConfiguration implements CommandLineRunner {
+	
+	DateTimeFormatter fmt1 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Autowired
 	UserRepository userRepository;
@@ -55,6 +60,12 @@ public class TestConfiguration implements CommandLineRunner {
 		FinancialPlanning fp2 = new FinancialPlanning(null, 35000.00, 3600.00, user2);
 		FinancialPlanning fp3 = new FinancialPlanning(null, 15000.00, 1250.00, user1);
 		financialPlanningRepository.saveAll(Arrays.asList(fp1, fp2, fp3));
+		
+		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false);
+		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false);
+		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true);
+		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
+		
 		
 		
 		
