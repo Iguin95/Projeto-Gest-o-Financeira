@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.financas.GestaoFinanceira.domain.Category;
+import com.financas.GestaoFinanceira.domain.CategoryExpense;
 import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.User;
@@ -66,6 +67,10 @@ public class TestConfiguration implements CommandLineRunner {
 		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true);
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
 		
+		CategoryExpense ce1 = new CategoryExpense(cat2, ex3, 3, 31.98);
+		CategoryExpense ce2 = new CategoryExpense(cat1, ex2, 1, 1800.99);
+		CategoryExpense ce3 = new CategoryExpense(cat2, ex1, 5, 13.99);
+		categoryExpenseRepository.saveAll(Arrays.asList(ce1, ce2, ce3));
 		
 		
 		

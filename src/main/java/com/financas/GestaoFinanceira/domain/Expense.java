@@ -83,15 +83,15 @@ public class Expense implements Serializable {
 		this.necessaryExpense = necessaryExpense;
 	}
 
-	@JsonIgnore
-	public Set<Category> getCategories() {
+	/*public Set<Category> getCategories() {
 		Set<Category> category = new HashSet<>();
 		for(CategoryExpense x : expensesAndTheirCategories) {
 			category.add(x.getCategory());
 		}
 		return category;
-	}
-
+	}*/
+	
+	@JsonIgnore
 	public Set<CategoryExpense> getExpensesAndTheirCategories() {
 		return expensesAndTheirCategories;
 	}
