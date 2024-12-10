@@ -19,7 +19,7 @@ public class CategoryExpense implements Serializable{
 	private CategoryExpensePK id = new CategoryExpensePK();
 	
 	private Integer quantity;
-	private Double price;
+	private Double pricePerUnit;
 	
 	public CategoryExpense() {
 	}
@@ -28,7 +28,7 @@ public class CategoryExpense implements Serializable{
 		id.setCategory(category);
 		id.setExpense(expense);
 		this.quantity = quantity;
-		this.price = price;
+		this.pricePerUnit = price;
 	}
 	
 	public Category getCategory() {
@@ -55,16 +55,16 @@ public class CategoryExpense implements Serializable{
 		this.quantity = quantity;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getPricePerUnit() {
+		return pricePerUnit;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setPricePerUnit(Double price) {
+		this.pricePerUnit = price;
 	}
 	
 	public Double getSubTotal() {
-		return price * quantity;
+		return pricePerUnit * quantity;
 	}
 
 	@Override
