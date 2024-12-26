@@ -1,13 +1,19 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,8 +27,9 @@ public class Category implements Serializable{
 	private String name;
 	private Double predictedCategoryLimit; //limite previsto da categoria
 	
-	//@OneToMany(mappedBy = "id.category")
-	//Set<CategoryExpense> expenses = new HashSet<>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "id.category")
+	private Set<CategoryExpense> categories = new HashSet<>();
 	
 	public Category() {
 	}
@@ -31,6 +38,15 @@ public class Category implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.predictedCategoryLimit = predictedCategoryLimit;
+	}
+	
+	@JsonIgnore
+	public List<Expense> getExpenses(){
+		List<Expense> listOfExpenses = new ArrayList<>();
+		for(CategoryExpense x : categories) {
+			listOfExpenses.add(x.getExpense());
+		}
+		return listOfExpenses;
 	}
 
 	public Long getId() {
@@ -57,10 +73,10 @@ public class Category implements Serializable{
 		this.predictedCategoryLimit = predictedCategoryLimit;
 	}
 
-	/*@JsonIgnore
-	public Set<CategoryExpense> getExpenses() {
-		return expenses;
-	}*/
+	@JsonIgnore
+	public Set<CategoryExpense> getCategories() {
+		return categories;
+	}
 
 	@Override
 	public int hashCode() {

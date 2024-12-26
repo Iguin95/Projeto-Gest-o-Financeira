@@ -13,7 +13,7 @@ import com.financas.GestaoFinanceira.Services.FinancialPlanningService;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 
 @RestController
-@RequestMapping(value = "/financialPlans")
+@RequestMapping(value = "/financial_plans")
 public class FinancialPlanningResource {
 
 	@Autowired

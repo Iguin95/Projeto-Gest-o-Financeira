@@ -3,6 +3,7 @@ package com.financas.GestaoFinanceira.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.financas.GestaoFinanceira.domain.pk.CategoryExpensePK;
 
 import jakarta.persistence.EmbeddedId;
@@ -15,6 +16,7 @@ public class CategoryExpense implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@EmbeddedId
 	private CategoryExpensePK id = new CategoryExpensePK();
 	
@@ -39,6 +41,7 @@ public class CategoryExpense implements Serializable{
 		id.setCategory(category);
 	}
 	
+	@JsonIgnore
 	public Expense getExpense() {
 		return id.getExpense();
 	}
