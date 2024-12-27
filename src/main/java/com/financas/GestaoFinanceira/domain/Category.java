@@ -27,7 +27,6 @@ public class Category implements Serializable{
 	private String name;
 	private Double predictedCategoryLimit; //limite previsto da categoria
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "id.category")
 	private Set<CategoryExpense> categories = new HashSet<>();
 	

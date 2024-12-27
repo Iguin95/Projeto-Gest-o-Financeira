@@ -32,7 +32,7 @@ public class CategoryExpense implements Serializable{
 		this.quantity = quantity;
 		this.pricePerUnit = price;
 	}
-	
+
 	public Category getCategory() {
 		return id.getCategory();
 	}
@@ -41,7 +41,6 @@ public class CategoryExpense implements Serializable{
 		id.setCategory(category);
 	}
 	
-	@JsonIgnore
 	public Expense getExpense() {
 		return id.getExpense();
 	}
