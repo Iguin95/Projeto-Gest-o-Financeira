@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.financas.GestaoFinanceira.domain.pk.CategoryExpensePK;
 
 import jakarta.persistence.EmbeddedId;
@@ -12,17 +13,17 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_category_expense")
-public class CategoryExpense implements Serializable{
+public class CategoryExpense implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	@EmbeddedId
 	private CategoryExpensePK id = new CategoryExpensePK();
-	
+
 	private Integer quantity;
 	private Double pricePerUnit;
-	
+
 	public CategoryExpense() {
 	}
 
@@ -34,23 +35,25 @@ public class CategoryExpense implements Serializable{
 	}
 
 	public Category getCategory() {
+		System.out.println("Categorias na classe CategoryExpense serializada!");
 		return id.getCategory();
 	}
-	
-	public void setCategory(Category category) {
-		id.setCategory(category);
-	}
-	
+
 	public Expense getExpense() {
+		System.out.println("Despesas na classe CategoryExpense serializada!");
 		return id.getExpense();
-	}
-	
-	public void setExpense(Expense expense) {
-		id.setExpense(expense);
 	}
 
 	public Integer getQuantity() {
 		return quantity;
+	}
+
+	public CategoryExpensePK getId() {
+		return id;
+	}
+
+	public void setId(CategoryExpensePK id) {
+		this.id = id;
 	}
 
 	public void setQuantity(Integer quantity) {
@@ -64,7 +67,7 @@ public class CategoryExpense implements Serializable{
 	public void setPricePerUnit(Double price) {
 		this.pricePerUnit = price;
 	}
-	
+
 	public Double getSubTotal() {
 		return pricePerUnit * quantity;
 	}

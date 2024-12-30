@@ -2,9 +2,9 @@ package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,11 +12,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_expense") //Despesa
+@Table(name = "tb_expense") // Despesa
 public class Expense implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,21 +29,27 @@ public class Expense implements Serializable {
 	private String description;
 	private Double price;
 	private LocalDate date;
-	private Boolean necessaryExpense; //despesa necessária
-	
-	//Para cada despesa será mostrada sua categoria
+	private Boolean necessaryExpense; // despesa necessária
+
 	@OneToMany(mappedBy = "id.expense")
-	private Set<CategoryExpense> categories = new HashSet<>();
+	private List<CategoryExpense> categories = new ArrayList<>();
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "financial_planning_id")
+	private FinancialPlanning financialPlanning;
+
 	public Expense() {
 	}
 
-	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
+	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense, 
+			FinancialPlanning financialPlanning) {
 		this.id = id;
 		this.description = description;
 		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
+		this.financialPlanning = financialPlanning;
 	}
 
 	public Long getId() {
@@ -83,9 +91,17 @@ public class Expense implements Serializable {
 	public void setNecessaryExpense(Boolean necessaryExpense) {
 		this.necessaryExpense = necessaryExpense;
 	}
-	
-	@JsonIgnore
-	public Set<CategoryExpense> getCategories() {
+
+	public FinancialPlanning getFinancialPlanning() {
+		return financialPlanning;
+	}
+
+	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
+		this.financialPlanning = financialPlanning;
+	}
+
+	public List<CategoryExpense> getCategories() {
+		System.out.println("Lista de categorias na classe Expense serializada!");
 		return categories;
 	}
 

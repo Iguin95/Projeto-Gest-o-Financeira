@@ -64,6 +64,7 @@ public class User implements Serializable {
 	}
 
 	public List<FinancialPlanning> getFinancialPlanning() {
+		System.out.println("Lista de planejamentos financeiros na classe User serializada!");
 		return financialPlanning;
 	}
 

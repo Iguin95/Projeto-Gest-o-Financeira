@@ -2,10 +2,8 @@ package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,8 +25,9 @@ public class Category implements Serializable{
 	private String name;
 	private Double predictedCategoryLimit; //limite previsto da categoria
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "id.category")
-	private Set<CategoryExpense> categories = new HashSet<>();
+	private List<CategoryExpense> categories = new ArrayList<>();
 	
 	public Category() {
 	}
@@ -38,16 +37,16 @@ public class Category implements Serializable{
 		this.name = name;
 		this.predictedCategoryLimit = predictedCategoryLimit;
 	}
-	
+
 	@JsonIgnore
-	public List<Expense> getExpenses(){
+	public List<Expense> getExpenses() {
 		List<Expense> listOfExpenses = new ArrayList<>();
-		for(CategoryExpense x : categories) {
+		for (CategoryExpense x : categories) {
 			listOfExpenses.add(x.getExpense());
 		}
 		return listOfExpenses;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -71,9 +70,8 @@ public class Category implements Serializable{
 	public void setPredictedCategoryLimit(Double predictedCategoryLimit) {
 		this.predictedCategoryLimit = predictedCategoryLimit;
 	}
-
-	@JsonIgnore
-	public Set<CategoryExpense> getCategories() {
+	
+	public List<CategoryExpense> getCategories() {
 		return categories;
 	}
 
