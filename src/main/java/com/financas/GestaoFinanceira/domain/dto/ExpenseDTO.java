@@ -14,7 +14,6 @@ public class ExpenseDTO {
 	private LocalDate date;
 	private Boolean necessaryExpense;
 	
-	
 	public ExpenseDTO(){
 	}
 	
@@ -61,5 +60,4 @@ public class ExpenseDTO {
 	public void setNecessaryExpense(Boolean necessaryExpense) {
 		this.necessaryExpense = necessaryExpense;
 	}
-
 }

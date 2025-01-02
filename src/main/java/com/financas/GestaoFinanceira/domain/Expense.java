@@ -2,14 +2,18 @@ package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Table;
@@ -31,6 +35,13 @@ public class Expense implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "financial_planning_id")
 	private FinancialPlanning financialPlanning;
+	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "Category_Expense",
+	joinColumns = @JoinColumn(name = "expense_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id"))
+	List<Category> categories = new ArrayList<>();
 
 	public Expense() {
 	}
@@ -91,6 +102,10 @@ public class Expense implements Serializable {
 
 	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
 		this.financialPlanning = financialPlanning;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
 	}
 
 	@Override

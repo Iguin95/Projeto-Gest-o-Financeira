@@ -1,13 +1,16 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Category implements Serializable{
 	private Long id;
 	private String name;
 	private Double predictedCategoryLimit; //limite previsto da categoria
+	
+	@ManyToMany(mappedBy = "categories")
+	List<Expense> expenses = new ArrayList<>();
 	
 	public Category() {
 	}
@@ -52,6 +58,10 @@ public class Category implements Serializable{
 
 	public void setPredictedCategoryLimit(Double predictedCategoryLimit) {
 		this.predictedCategoryLimit = predictedCategoryLimit;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
 	}
 
 	@Override

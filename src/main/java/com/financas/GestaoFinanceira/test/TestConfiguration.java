@@ -71,10 +71,14 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		
+		ex1.getCategories().addAll(Arrays.asList(cat2));
+		ex2.getCategories().addAll(Arrays.asList(cat1));
+		ex3.getCategories().addAll(Arrays.asList(cat2));
+		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
 		
-		
-		
-		
+		cat1.getExpenses().addAll(Arrays.asList(ex1, ex2));
+		cat2.getExpenses().addAll(Arrays.asList(ex3));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 	}
 
 }

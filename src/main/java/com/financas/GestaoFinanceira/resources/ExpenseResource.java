@@ -3,7 +3,6 @@ package com.financas.GestaoFinanceira.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +19,15 @@ public class ExpenseResource {
 	ExpenseService service;
 	
 	@GetMapping
-	public ResponseEntity<List<ExpenseDTO>> findAll(){
+	public List<ExpenseDTO> findAll(){
 		List<ExpenseDTO> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		return list;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ExpenseDTO> findById(@PathVariable Long id){
+	public ExpenseDTO findById(@PathVariable Long id){
 		ExpenseDTO obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+		return obj;
 	}
 
 }
