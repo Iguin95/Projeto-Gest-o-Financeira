@@ -34,6 +34,7 @@ public class CategoryExpense implements Serializable {
 		this.pricePerUnit = price;
 	}
 
+	@JsonIgnore
 	public Category getCategory() {
 		System.out.println("Categorias na classe CategoryExpense serializada!");
 		return id.getCategory();

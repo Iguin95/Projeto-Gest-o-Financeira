@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,7 +31,8 @@ public class FinancialPlanning implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "financialPlanning")
 	private List<Expense> expenses = new ArrayList<>();
 	

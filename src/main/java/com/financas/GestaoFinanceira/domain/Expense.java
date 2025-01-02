@@ -30,11 +30,11 @@ public class Expense implements Serializable {
 	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; // despesa necessária
-
-	@OneToMany(mappedBy = "id.expense")
-	private List<CategoryExpense> categories = new ArrayList<>();
 	
 	@JsonIgnore
+	@OneToMany(mappedBy = "id.expense")
+	private List<CategoryExpense> categories = new ArrayList<>();
+
 	@ManyToOne
 	@JoinColumn(name = "financial_planning_id")
 	private FinancialPlanning financialPlanning;
