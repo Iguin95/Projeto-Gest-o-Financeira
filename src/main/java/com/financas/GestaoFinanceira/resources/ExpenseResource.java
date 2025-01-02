@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.ExpenseService;
-import com.financas.GestaoFinanceira.domain.Expense;
+import com.financas.GestaoFinanceira.domain.dto.ExpenseDTO;
 
 @RestController
 @RequestMapping(value = "/expenses") 
@@ -20,14 +20,14 @@ public class ExpenseResource {
 	ExpenseService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Expense>> findAll(){
-		List<Expense> list = service.findAll();
+	public ResponseEntity<List<ExpenseDTO>> findAll(){
+		List<ExpenseDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Expense> findById(@PathVariable Long id){
-		Expense obj = service.findById(id);
+	public ResponseEntity<ExpenseDTO> findById(@PathVariable Long id){
+		ExpenseDTO obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
