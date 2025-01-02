@@ -1,12 +1,9 @@
 package com.financas.GestaoFinanceira.domain.dto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
-import com.financas.GestaoFinanceira.domain.CategoryExpense;
 import com.financas.GestaoFinanceira.domain.Expense;
 
 public class ExpenseDTO {
@@ -17,7 +14,6 @@ public class ExpenseDTO {
 	private LocalDate date;
 	private Boolean necessaryExpense;
 	
-	private List<CategoryExpense> categories = new ArrayList<>();
 	
 	public ExpenseDTO(){
 	}
@@ -66,11 +62,4 @@ public class ExpenseDTO {
 		this.necessaryExpense = necessaryExpense;
 	}
 
-	public List<CategoryExpense> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<CategoryExpense> categories) {
-		this.categories = categories;
-	}
 }

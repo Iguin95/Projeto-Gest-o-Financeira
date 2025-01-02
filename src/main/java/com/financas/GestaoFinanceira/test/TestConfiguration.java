@@ -11,11 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.financas.GestaoFinanceira.domain.Category;
-import com.financas.GestaoFinanceira.domain.CategoryExpense;
 import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.User;
-import com.financas.GestaoFinanceira.repositories.CategoryExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
 import com.financas.GestaoFinanceira.repositories.ExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
@@ -39,9 +37,6 @@ public class TestConfiguration implements CommandLineRunner {
 	
 	@Autowired
 	FinancialPlanningRepository financialPlanningRepository;
-	
-	@Autowired
-	CategoryExpenseRepository categoryExpenseRepository;
 	
 	@Autowired
 	ReportRepository reportRepository;
@@ -76,19 +71,7 @@ public class TestConfiguration implements CommandLineRunner {
 		Category cat2 = new Category(null, "Alimentação", 850.00);
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		
-		CategoryExpense ce1 = new CategoryExpense(cat2, ex3, 3, 31.98);
-		CategoryExpense ce2 = new CategoryExpense(cat1, ex2, 1, 1800.99);
-		CategoryExpense ce3 = new CategoryExpense(cat2, ex1, 5, 13.99);
-		categoryExpenseRepository.saveAll(Arrays.asList(ce1, ce2, ce3));
 		
-		ex1.getCategories().addAll(Arrays.asList(ce3));
-		ex2.getCategories().addAll(Arrays.asList(ce2));
-		ex3.getCategories().addAll(Arrays.asList(ce1));
-		
-		cat1.getCategories().addAll(Arrays.asList(ce2));
-		cat2.getCategories().addAll(Arrays.asList(ce1, ce3));
-		
-		categoryExpenseRepository.saveAll(Arrays.asList(ce1, ce2, ce3));
 		
 		
 		
