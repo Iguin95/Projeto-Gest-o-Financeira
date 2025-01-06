@@ -15,8 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,29 +31,27 @@ public class Expense implements Serializable {
 	private Double price;
 	private LocalDate date;
 	private Boolean necessaryExpense; // despesa necessária
-
-	@ManyToOne
-	@JoinColumn(name = "financial_planning_id")
-	private FinancialPlanning financialPlanning;
 	
 	@JsonIgnoreProperties("expenses")
 	@ManyToMany
 	@JoinTable(name = "Category_Expense",
 	joinColumns = @JoinColumn(name = "expense_id"),
 	inverseJoinColumns = @JoinColumn(name = "category_id"))
-	List<Category> categories = new ArrayList<>();
+	private List<Category> categories = new ArrayList<>();
+	
+	@JsonIgnoreProperties("userExpenses")
+	@OneToMany(mappedBy = "id.expense")
+	private List<UserExpense> users = new ArrayList<>();
 
 	public Expense() {
 	}
 
-	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense, 
-			FinancialPlanning financialPlanning) {
+	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
 		this.id = id;
 		this.description = description;
 		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
-		this.financialPlanning = financialPlanning;
 	}
 
 	public Long getId() {
@@ -97,16 +94,12 @@ public class Expense implements Serializable {
 		this.necessaryExpense = necessaryExpense;
 	}
 
-	public FinancialPlanning getFinancialPlanning() {
-		return financialPlanning;
-	}
-
-	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
-		this.financialPlanning = financialPlanning;
-	}
-
 	public List<Category> getCategories() {
 		return categories;
+	}
+
+	public List<UserExpense> getUsers() {
+		return users;
 	}
 
 	@Override

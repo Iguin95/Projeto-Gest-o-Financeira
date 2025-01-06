@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,10 @@ public class User implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<FinancialPlanning> financialPlanning = new ArrayList<>();
+	
+	@JsonIgnoreProperties("users")
+	@OneToMany(mappedBy = "id.user")
+	private List<UserExpense> userExpenses = new ArrayList<>();
 	
 	public User() {
 	}
@@ -66,6 +71,10 @@ public class User implements Serializable {
 	public List<FinancialPlanning> getFinancialPlanning() {
 		System.out.println("Lista de planejamentos financeiros na classe User serializada!");
 		return financialPlanning;
+	}
+
+	public List<UserExpense> getUserExpenses() {
+		return userExpenses;
 	}
 
 	@Override

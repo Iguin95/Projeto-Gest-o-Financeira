@@ -3,14 +3,14 @@ package com.financas.GestaoFinanceira.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.UserService;
-import com.financas.GestaoFinanceira.domain.User;
+import com.financas.GestaoFinanceira.domain.dto.UserDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.UserMinDTO;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -20,15 +20,15 @@ public class UserResource {
 	UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+	public List<UserDTO> findAll(){
+		List<UserDTO> list = service.findAll();
+		return list;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public UserMinDTO findById(@PathVariable Long id){
+		UserMinDTO obj = service.findById(id);
+		return obj;
 	}
 	
 	

@@ -14,10 +14,12 @@ import com.financas.GestaoFinanceira.domain.Category;
 import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.User;
+import com.financas.GestaoFinanceira.domain.UserExpense;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
 import com.financas.GestaoFinanceira.repositories.ExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
 import com.financas.GestaoFinanceira.repositories.ReportRepository;
+import com.financas.GestaoFinanceira.repositories.UserExpenseRepository;
 import com.financas.GestaoFinanceira.repositories.UserRepository;
 
 @Configuration
@@ -41,6 +43,9 @@ public class TestConfiguration implements CommandLineRunner {
 	@Autowired
 	ReportRepository reportRepository;
 	
+	@Autowired
+	UserExpenseRepository userExpenseRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -57,15 +62,22 @@ public class TestConfiguration implements CommandLineRunner {
 		user2.getFinancialPlanning().addAll(Arrays.asList(fp2));
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
-		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false, fp1);
-		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false, fp3);
-		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true, fp2);
+		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false);
+		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false);
+		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true);
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
 		
-		fp1.getExpenses().addAll(Arrays.asList(ex1));
-		fp2.getExpenses().addAll(Arrays.asList(ex3));
-		fp3.getExpenses().addAll(Arrays.asList(ex2));
-		financialPlanningRepository.saveAll(Arrays.asList(fp1, fp2, fp3));
+		UserExpense ue1 = new UserExpense(ex1, user1, 4);
+		UserExpense ue2 = new UserExpense(ex2, user1, 1);
+		UserExpense ue3 = new UserExpense(ex3, user2, 2);
+		
+		user1.getUserExpenses().addAll(Arrays.asList(ue1, ue2));
+		user2.getUserExpenses().addAll(Arrays.asList(ue3));
+		
+		ex1.getUsers().addAll(Arrays.asList(ue1));
+		ex2.getUsers().addAll(Arrays.asList(ue2));
+		ex3.getUsers().addAll(Arrays.asList(ue3));
+		userExpenseRepository.saveAll(Arrays.asList(ue1, ue2, ue3));
 		
 		Category cat1 = new Category(null, "Informática", 500.00);
 		Category cat2 = new Category(null, "Alimentação", 850.00);
