@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,7 +37,7 @@ public class Expense implements Serializable {
 	@JoinColumn(name = "financial_planning_id")
 	private FinancialPlanning financialPlanning;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("expenses")
 	@ManyToMany
 	@JoinTable(name = "Category_Expense",
 	joinColumns = @JoinColumn(name = "expense_id"),

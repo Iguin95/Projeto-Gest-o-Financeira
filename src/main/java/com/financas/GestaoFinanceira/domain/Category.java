@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +25,7 @@ public class Category implements Serializable{
 	private String name;
 	private Double predictedCategoryLimit; //limite previsto da categoria
 	
+	@JsonIgnoreProperties("categories")
 	@ManyToMany(mappedBy = "categories")
 	List<Expense> expenses = new ArrayList<>();
 	

@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.Category;
-import com.financas.GestaoFinanceira.domain.Expense;
 
 public class CategoryDTO {
 
@@ -14,14 +13,17 @@ public class CategoryDTO {
 	private String name;
 	private Double predictedCategoryLimit;
 	
-	List<Expense> expenses = new ArrayList<>();
+	List<ExpenseDTO> expenses = new ArrayList<>();
 	
 	public CategoryDTO() {
 	}
 	
 	public CategoryDTO(Category result) {
 		BeanUtils.copyProperties(result, this);
-		expenses = result.getExpenses();
+		// Convertendo cada Expense para ExpenseDTO
+        if (result.getExpenses() != null) {
+            result.getExpenses().forEach(expense -> this.expenses.add(new ExpenseDTO(expense)));
+        }
 	}
 
 	public Long getId() {
@@ -48,7 +50,7 @@ public class CategoryDTO {
 		this.predictedCategoryLimit = predictedCategoryLimit;
 	}
 
-	public List<Expense> getExpenses() {
+	public List<ExpenseDTO> getExpenses() {
 		return expenses;
 	}
 	
