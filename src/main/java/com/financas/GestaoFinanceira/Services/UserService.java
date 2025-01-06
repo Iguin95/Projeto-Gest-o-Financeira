@@ -20,7 +20,7 @@ public class UserService {
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll(){
 		List<User> list = repository.findAll();
-		List<UserDTO> dto = list.stream().map(x -> new UserDTO()).toList();
+		List<UserDTO> dto = list.stream().map(x -> new UserDTO(x)).toList();
 		return dto;
 	}
 	
