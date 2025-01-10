@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.UserService;
-import com.financas.GestaoFinanceira.domain.dto.UserDTO;
-import com.financas.GestaoFinanceira.domain.dto.min.UserMinDTO;
+import com.financas.GestaoFinanceira.domain.dto.UserNoListDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -20,14 +20,14 @@ public class UserResource {
 	UserService service;
 	
 	@GetMapping
-	public List<UserDTO> findAll(){
-		List<UserDTO> list = service.findAll();
+	public List<UserNoListDTO> findAll(){
+		List<UserNoListDTO> list = service.findAll();
 		return list;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public UserMinDTO findById(@PathVariable Long id){
-		UserMinDTO obj = service.findById(id);
+	public UserMinWithListDTO findById(@PathVariable Long id){
+		UserMinWithListDTO obj = service.findById(id);
 		return obj;
 	}
 	

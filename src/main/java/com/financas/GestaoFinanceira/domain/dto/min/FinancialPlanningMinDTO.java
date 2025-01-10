@@ -1,25 +1,25 @@
-package com.financas.GestaoFinanceira.domain.dto;
+package com.financas.GestaoFinanceira.domain.dto.min;
 
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
-import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
+import com.financas.GestaoFinanceira.domain.dto.UserNoListDTO;
 
-public class FinancialPlanningDTO {
+public class FinancialPlanningMinDTO {
 
 	private Long id;
 	private Double annualGoal; 
 	private Double monthlyGoal;
 	
-	private UserMinWithListDTO user;
+	private UserNoListDTO user;
 	
-	public FinancialPlanningDTO() {
+	public FinancialPlanningMinDTO() {
 	}
 
-	public FinancialPlanningDTO(FinancialPlanning entity) {
+	public FinancialPlanningMinDTO(FinancialPlanning entity) {
 		BeanUtils.copyProperties(entity, this);
 		if (entity.getUser() != null) {
-	        this.user = new UserMinWithListDTO(entity.getUser());
+	        this.user = new UserNoListDTO(entity.getUser());
 	    }
 	}
 
@@ -47,15 +47,11 @@ public class FinancialPlanningDTO {
 		this.monthlyGoal = monthlyGoal;
 	}
 
-	public UserMinWithListDTO getUser() {
+	public UserNoListDTO getUser() {
 		return user;
 	}
 
-	public void setUser(UserMinWithListDTO user) {
+	public void setUser(UserNoListDTO user) {
 		this.user = user;
-	}
-
-	public Double getDesiredSavings() {
-		return monthlyGoal * 12;
 	}
 }

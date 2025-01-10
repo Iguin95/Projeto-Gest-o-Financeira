@@ -8,21 +8,20 @@ import org.springframework.beans.BeanUtils;
 import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.domain.dto.UserExpenseDTO;
 
-public class UserMinDTO {
+public class UserMinWithListDTO {
 
 	private Long id;
 	private String name;
 	
 	private List<UserExpenseDTO> userExpenses = new ArrayList<>();
 
-	public UserMinDTO() {
+	public UserMinWithListDTO() {
 	}
 
-	public UserMinDTO(User entity) {
+	public UserMinWithListDTO(User entity) {
 		BeanUtils.copyProperties(entity, this);
 
 		if (entity.getUserExpenses() != null) {
-            // Para cada UserExpense, adicione o UserExpenseDTO correspondente
             entity.getUserExpenses().forEach(x -> this.userExpenses.add(new UserExpenseDTO(x)));
         }
 	}

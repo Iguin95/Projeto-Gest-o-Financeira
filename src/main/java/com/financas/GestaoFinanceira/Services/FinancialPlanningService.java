@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
 import com.financas.GestaoFinanceira.domain.dto.FinancialPlanningDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.FinancialPlanningMinDTO;
 import com.financas.GestaoFinanceira.repositories.FinancialPlanningRepository;
 
 @Service
@@ -17,9 +18,9 @@ public class FinancialPlanningService {
 	private FinancialPlanningRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<FinancialPlanningDTO> findAll(){
+	public List<FinancialPlanningMinDTO> findAll(){
 		List<FinancialPlanning> list = repository.findAll();
-		List<FinancialPlanningDTO> dto = list.stream().map(x -> new FinancialPlanningDTO(x)).toList();
+		List<FinancialPlanningMinDTO> dto = list.stream().map(x -> new FinancialPlanningMinDTO(x)).toList();
 		return dto;
 	}
 	

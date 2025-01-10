@@ -4,16 +4,16 @@ import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.User;
 
-public class UserDTO {
+public class UserNoListDTO {
 
 	private Long id;
 	private String name;
 	private Double monthlyIncome;
 	
-	public UserDTO(){	
+	public UserNoListDTO(){	
 	}
 	
-	public UserDTO(User entity) {
+	public UserNoListDTO(User entity) {
 		BeanUtils.copyProperties(entity, this);
 	}
 

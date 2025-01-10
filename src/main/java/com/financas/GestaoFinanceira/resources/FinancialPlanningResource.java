@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.FinancialPlanningService;
 import com.financas.GestaoFinanceira.domain.dto.FinancialPlanningDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.FinancialPlanningMinDTO;
 
 @RestController
 @RequestMapping(value = "/financial_plans")
@@ -19,8 +20,8 @@ public class FinancialPlanningResource {
 	FinancialPlanningService service;
 	
 	@GetMapping
-	public List<FinancialPlanningDTO> findAll(){
-		List<FinancialPlanningDTO> list = service.findAll();
+	public List<FinancialPlanningMinDTO> findAll(){
+		List<FinancialPlanningMinDTO> list = service.findAll();
 		return list;
 	}
 	
