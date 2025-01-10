@@ -8,19 +8,19 @@ import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
 public class FinancialPlanningDTO {
 
 	private Long id;
-	private Double annualGoal; 
+	private Double annualGoal;
 	private Double monthlyGoal;
-	
+
 	private UserMinWithListDTO user;
-	
+
 	public FinancialPlanningDTO() {
 	}
 
 	public FinancialPlanningDTO(FinancialPlanning entity) {
 		BeanUtils.copyProperties(entity, this);
 		if (entity.getUser() != null) {
-	        this.user = new UserMinWithListDTO(entity.getUser());
-	    }
+			this.user = new UserMinWithListDTO(entity.getUser());
+		}
 	}
 
 	public Long getId() {
@@ -57,5 +57,14 @@ public class FinancialPlanningDTO {
 
 	public Double getDesiredSavings() {
 		return monthlyGoal * 12;
+	}
+
+	public Double getTotal() {
+		if (user == null || user.getUserExpenses() == null) {
+			return 0.0;
+		}
+		// Calcula o total somando os subtotais de cada UserExpenseDTO
+		return user.getUserExpenses().stream().mapToDouble(UserExpenseDTO::getSubTotal) // Chama o método getSubTotal
+				.sum();
 	}
 }
