@@ -1,4 +1,4 @@
-package com.financas.GestaoFinanceira.domain.dto;
+package com.financas.GestaoFinanceira.domain.dto.min;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,25 +6,24 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.Category;
-import com.financas.GestaoFinanceira.domain.dto.min.ExpenseMinDTO;
 
-public class CategoryDTO {
+public class CategoryWithListMinDTO {
 
 	private Long id;
 	private String name;
 	private Double predictedCategoryLimit;
-	
+
 	List<ExpenseMinDTO> expenses = new ArrayList<>();
-	
-	public CategoryDTO() {
+
+	public CategoryWithListMinDTO() {
 	}
-	
-	public CategoryDTO(Category result) {
-		BeanUtils.copyProperties(result, this); //não copia dados contidos em listas
+
+	public CategoryWithListMinDTO(Category result) {
+		BeanUtils.copyProperties(result, this); // não copia dados contidos em listas
 		// Convertendo cada Expense para ExpenseDTO
-        if (result.getExpenses() != null) {
-            result.getExpenses().forEach(expense -> this.expenses.add(new ExpenseMinDTO(expense)));
-        }
+		if (result.getExpenses() != null) {
+			result.getExpenses().forEach(expense -> this.expenses.add(new ExpenseMinDTO(expense)));
+		}
 	}
 
 	public Long getId() {
@@ -54,5 +53,5 @@ public class CategoryDTO {
 	public List<ExpenseMinDTO> getExpenses() {
 		return expenses;
 	}
-	
+
 }

@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.financas.GestaoFinanceira.domain.Category;
-import com.financas.GestaoFinanceira.domain.dto.CategoryDTO;
+import com.financas.GestaoFinanceira.domain.dto.CategoryWithListDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.CategoryWithListMinDTO;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
 
 @Service
@@ -17,15 +18,15 @@ public class CategoryService {
 	CategoryRepository repository;
 	
 	@Transactional(readOnly = true)
-	public List<CategoryDTO> findAll(){
+	public List<CategoryWithListMinDTO> findAll(){
 		List<Category> result = repository.findAll();
-		List<CategoryDTO> dto = result.stream().map(x -> new CategoryDTO(x)).toList();
+		List<CategoryWithListMinDTO> dto = result.stream().map(x -> new CategoryWithListMinDTO(x)).toList();
 		return dto;
 	}
 	
 	@Transactional(readOnly = true)
-	public CategoryDTO findById(Long id) {
+	public CategoryWithListDTO findById(Long id) {
 		Category result = repository.findById(id).get();
-		return new CategoryDTO(result);
+		return new CategoryWithListDTO(result);
 	}
 }

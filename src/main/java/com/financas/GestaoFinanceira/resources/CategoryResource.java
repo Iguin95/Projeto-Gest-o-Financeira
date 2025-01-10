@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.CategoryService;
-import com.financas.GestaoFinanceira.domain.dto.CategoryDTO;
+import com.financas.GestaoFinanceira.domain.dto.CategoryWithListDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.CategoryWithListMinDTO;
 
 
 @RestController
@@ -20,14 +21,14 @@ public class CategoryResource {
 	CategoryService service;
 	
 	@GetMapping
-	public List<CategoryDTO> findAll(){
-		List<CategoryDTO> list = service.findAll();
+	public List<CategoryWithListMinDTO> findAll(){
+		List<CategoryWithListMinDTO> list = service.findAll();
 		return list;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public CategoryDTO findById(@PathVariable Long id){
-		CategoryDTO obj = service.findById(id);
+	public CategoryWithListDTO findById(@PathVariable Long id){
+		CategoryWithListDTO obj = service.findById(id);
 		return obj;
 	}
 }
