@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class FinancialPlanning implements Serializable{
 	private Double annualGoal; //meta anual de economia
 	private Double monthlyGoal; //meta mensal de economia
 	
+	@JsonIgnoreProperties("financialPlanning")
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -68,6 +71,10 @@ public class FinancialPlanning implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Double getDesiredSavings() {
+		return monthlyGoal * 12;
 	}
 
 	@Override

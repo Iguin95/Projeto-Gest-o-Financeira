@@ -3,14 +3,13 @@ package com.financas.GestaoFinanceira.resources;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.financas.GestaoFinanceira.Services.FinancialPlanningService;
-import com.financas.GestaoFinanceira.domain.FinancialPlanning;
+import com.financas.GestaoFinanceira.domain.dto.FinancialPlanningDTO;
 
 @RestController
 @RequestMapping(value = "/financial_plans")
@@ -20,14 +19,14 @@ public class FinancialPlanningResource {
 	FinancialPlanningService service;
 	
 	@GetMapping
-	public ResponseEntity<List<FinancialPlanning>> findAll(){
-		List<FinancialPlanning> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+	public List<FinancialPlanningDTO> findAll(){
+		List<FinancialPlanningDTO> list = service.findAll();
+		return list;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<FinancialPlanning> findById(@PathVariable Long id){
-		FinancialPlanning obj = service.fingById(id);
-		return ResponseEntity.ok().body(obj);
+	public FinancialPlanningDTO findById(@PathVariable Long id){
+		FinancialPlanningDTO obj = service.fingById(id);
+		return obj;
 	}
 }

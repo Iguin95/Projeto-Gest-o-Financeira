@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ public class User implements Serializable {
 	private String name;
 	private Double monthlyIncome; //renda mensal
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("user")
 	@OneToMany(mappedBy = "user")
 	private List<FinancialPlanning> financialPlanning = new ArrayList<>();
 	
