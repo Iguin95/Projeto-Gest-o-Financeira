@@ -54,6 +54,8 @@ public class FinancialPlanningDTO {
 	public void setUser(UserMinDTO user) {
 		this.user = user;
 	}
-	
-	
+
+	public Double getDesiredSavings() {
+		return monthlyGoal * 12;
+	}
 }

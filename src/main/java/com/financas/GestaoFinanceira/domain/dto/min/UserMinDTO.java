@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.User;
-import com.financas.GestaoFinanceira.domain.dto.ExpenseDTO;
+import com.financas.GestaoFinanceira.domain.dto.UserExpenseDTO;
 
 public class UserMinDTO {
 
 	private Long id;
 	private String name;
-
-	private List<ExpenseDTO> expenses = new ArrayList<>();
+	
+	private List<UserExpenseDTO> userExpenses = new ArrayList<>();
 
 	public UserMinDTO() {
 	}
@@ -22,9 +22,9 @@ public class UserMinDTO {
 		BeanUtils.copyProperties(entity, this);
 
 		if (entity.getUserExpenses() != null) {
-			// Para cada UserExpense, adicione o Expense correspondente ao DTO
-			entity.getUserExpenses().forEach(x -> this.expenses.add(new ExpenseDTO(x.getExpense())));
-		}
+            // Para cada UserExpense, adicione o UserExpenseDTO correspondente
+            entity.getUserExpenses().forEach(x -> this.userExpenses.add(new UserExpenseDTO(x)));
+        }
 	}
 
 	public Long getId() {
@@ -43,7 +43,8 @@ public class UserMinDTO {
 		this.name = name;
 	}
 
-	public List<ExpenseDTO> getExpenses() {
-		return expenses;
+	public List<UserExpenseDTO> getUserExpenses() {
+		return userExpenses;
 	}
+	
 }

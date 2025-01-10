@@ -51,7 +51,7 @@ public class UserExpense {
 	}
 	
 	public Double getSubTotal() {
-		return quantity + id.getExpense().getPrice();
+		return quantity * id.getExpense().getPrice();
 	}
 
 	@Override
