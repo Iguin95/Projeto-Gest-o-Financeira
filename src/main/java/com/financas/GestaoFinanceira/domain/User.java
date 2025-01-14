@@ -2,11 +2,15 @@ package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +28,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private String email;
 	private Double monthlyIncome; //renda mensal
 	
 	@JsonIgnoreProperties("user")
@@ -34,12 +39,17 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "id.user")
 	private List<UserExpense> userExpenses = new ArrayList<>();
 	
+	@ElementCollection
+	@CollectionTable(name = "tb_contato")
+	private Set<String> contatosTelefonicos = new HashSet<>();
+	
 	public User() {
 	}
 
-	public User(Long id, String name, Double monthlyIncome) {
+	public User(Long id, String name, String email, Double monthlyIncome) {
 		this.id = id;
 		this.name = name;
+		this.email = email;
 		this.monthlyIncome = monthlyIncome;
 	}
 
@@ -59,6 +69,14 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Double getMonthlyIncome() {
 		return monthlyIncome;
 	}
@@ -74,6 +92,10 @@ public class User implements Serializable {
 
 	public List<UserExpense> getUserExpenses() {
 		return userExpenses;
+	}
+
+	public Set<String> getContatosTelefonicos() {
+		return contatosTelefonicos;
 	}
 
 	@Override

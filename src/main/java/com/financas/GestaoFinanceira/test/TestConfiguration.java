@@ -49,9 +49,12 @@ public class TestConfiguration implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User user1 = new User(null, "Igor", 2100.00);
-		User user2 = new User(null, "Maria", 5000.00);
+		User user1 = new User(null, "Igor", "igor@gmail.com", 2100.00);
+		User user2 = new User(null, "Maria", "maria@gmail.com", 5000.00);
 		userRepository.saveAll(Arrays.asList(user1, user2));
+		
+		user1.getContatosTelefonicos().addAll(Arrays.asList("31999999954"));
+		user2.getContatosTelefonicos().addAll(Arrays.asList("44898564212", "55988946712"));
 		
 		FinancialPlanning fp1 = new FinancialPlanning(null, 20000.00, 1500.00, user1);
 		FinancialPlanning fp2 = new FinancialPlanning(null, 35000.00, 3600.00, user2);
