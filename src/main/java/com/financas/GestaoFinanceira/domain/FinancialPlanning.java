@@ -1,7 +1,8 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -30,6 +32,10 @@ public class FinancialPlanning implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@JsonIgnoreProperties("financialPlannings")
+	@ManyToMany(mappedBy = "financialPlannings")
+	private List<Report> reports = new ArrayList<>();
 	
 	public FinancialPlanning() {
 	}
@@ -75,6 +81,10 @@ public class FinancialPlanning implements Serializable{
 	
 	public Double getDesiredSavings() {
 		return monthlyGoal * 12;
+	}
+
+	public List<Report> getReports() {
+		return reports;
 	}
 
 	@Override

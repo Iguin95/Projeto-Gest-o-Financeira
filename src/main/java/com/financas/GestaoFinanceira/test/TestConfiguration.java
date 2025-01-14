@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import com.financas.GestaoFinanceira.domain.Category;
 import com.financas.GestaoFinanceira.domain.Expense;
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
+import com.financas.GestaoFinanceira.domain.Report;
 import com.financas.GestaoFinanceira.domain.User;
 import com.financas.GestaoFinanceira.domain.UserExpense;
 import com.financas.GestaoFinanceira.repositories.CategoryRepository;
@@ -53,8 +54,8 @@ public class TestConfiguration implements CommandLineRunner {
 		User user2 = new User(null, "Maria", "maria@gmail.com", 5000.00);
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
-		user1.getContatosTelefonicos().addAll(Arrays.asList("31999999954"));
-		user2.getContatosTelefonicos().addAll(Arrays.asList("44898564212", "55988946712"));
+		user1.getTelephoneContacts().addAll(Arrays.asList("31999999954"));
+		user2.getTelephoneContacts().addAll(Arrays.asList("44898564212", "55988946712"));
 		
 		FinancialPlanning fp1 = new FinancialPlanning(null, 20000.00, 1500.00, user1);
 		FinancialPlanning fp2 = new FinancialPlanning(null, 35000.00, 3600.00, user2);
@@ -94,6 +95,9 @@ public class TestConfiguration implements CommandLineRunner {
 		cat1.getExpenses().addAll(Arrays.asList(ex1, ex2));
 		cat2.getExpenses().addAll(Arrays.asList(ex3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		
+		Report r1 = new Report(null, user1);
+		reportRepository.saveAll(Arrays.asList(r1));
 	}
 
 }

@@ -41,7 +41,7 @@ public class User implements Serializable {
 	
 	@ElementCollection
 	@CollectionTable(name = "tb_contato")
-	private Set<String> contatosTelefonicos = new HashSet<>();
+	private Set<String> telephoneContacts = new HashSet<>();
 	
 	public User() {
 	}
@@ -94,8 +94,8 @@ public class User implements Serializable {
 		return userExpenses;
 	}
 
-	public Set<String> getContatosTelefonicos() {
-		return contatosTelefonicos;
+	public Set<String> getTelephoneContacts() {
+		return telephoneContacts;
 	}
 
 	@Override

@@ -1,12 +1,20 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,12 +26,24 @@ public class Report implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonIgnoreProperties("reports")
+	@ManyToMany
+	@JoinTable(name = "Report_Financial_Tb",
+	joinColumns = @JoinColumn(name = "id_report"),
+	inverseJoinColumns = @JoinColumn(name = "id_financialPlanning"))
+	private List<FinancialPlanning> financialPlannings = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Report() {
 	}
 
-	public Report(Long id) {
+	public Report(Long id, User user) {
 		this.id = id;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -34,28 +54,18 @@ public class Report implements Serializable {
 		this.id = id;
 	}
 
-	/*public List<Double> getSpendingByCategory() { // gastos por categoria
-		List<Double> category = new ArrayList<>();
-		// para cada objeto x do tipo CategoryExpense contido na minha lista expenses,
-		// faça...
-		for (CategoryExpense x : expenses) {
-			category.add(x.getSubTotal());
-		}
-		return category;
+	public User getUser() {
+		return user;
 	}
 
-	public Double getTotalExpenses() { // gastos totais
-		double sum = 0.0;
-		for (CategoryExpense x : expenses) {
-			sum += x.getSubTotal();
-		}
-		return sum;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Double getFinalBalance() { // saldo final (salario - gastos totais)
-		return getTotalExpenses() - getUser().getMonthlyIncome();
-	}*/
-
+	public List<FinancialPlanning> getFinancialPlannings() {
+		return financialPlannings;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
