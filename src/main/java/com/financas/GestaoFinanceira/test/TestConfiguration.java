@@ -71,6 +71,7 @@ public class TestConfiguration implements CommandLineRunner {
 		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true);
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
 		
+		//cada despesa de usuario tem que ter o seu proprio planejamento
 		UserExpense ue1 = new UserExpense(ex1, user1, 4);
 		UserExpense ue2 = new UserExpense(ex2, user1, 1);
 		UserExpense ue3 = new UserExpense(ex3, user2, 2);
@@ -97,7 +98,8 @@ public class TestConfiguration implements CommandLineRunner {
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		
 		Report r1 = new Report(null, user1);
-		reportRepository.saveAll(Arrays.asList(r1));
+		Report r2 = new Report(null, user2);
+		reportRepository.saveAll(Arrays.asList(r1, r2));
 	}
 
 }
