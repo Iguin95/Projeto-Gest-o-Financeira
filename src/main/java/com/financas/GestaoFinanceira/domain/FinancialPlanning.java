@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +37,10 @@ public class FinancialPlanning implements Serializable{
 	@JsonIgnoreProperties("financialPlannings")
 	@ManyToMany(mappedBy = "financialPlannings")
 	private List<Report> reports = new ArrayList<>();
+	
+	@JsonIgnoreProperties("financialPlanning")
+	@OneToMany(mappedBy = "financialPlanning")
+	private List<Expense> expenses = new ArrayList<>();
 	
 	public FinancialPlanning() {
 	}
@@ -85,6 +90,10 @@ public class FinancialPlanning implements Serializable{
 
 	public List<Report> getReports() {
 		return reports;
+	}
+
+	public List<Expense> getExpenses() {
+		return expenses;
 	}
 
 	@Override

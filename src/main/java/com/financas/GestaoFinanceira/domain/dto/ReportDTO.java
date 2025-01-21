@@ -33,6 +33,4 @@ public class ReportDTO {
 	public List<FinancialPlanningDTO> getFinancialPlannings() {
 		return financialPlannings;
 	}
-
-	
 }

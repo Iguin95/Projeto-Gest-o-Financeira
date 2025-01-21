@@ -15,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -42,16 +43,23 @@ public class Expense implements Serializable {
 	@JsonIgnoreProperties("userExpenses")
 	@OneToMany(mappedBy = "id.expense")
 	private List<UserExpense> users = new ArrayList<>();
+	
+	@JsonIgnoreProperties("expenses")
+	@ManyToOne
+	@JoinColumn(name = "financial_planning_id")
+	private FinancialPlanning financialPlanning;
 
 	public Expense() {
 	}
 
-	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense) {
+	public Expense(Long id, String description, Double value, LocalDate date, Boolean necessaryExpense,
+			FinancialPlanning financialPlanning) {
 		this.id = id;
 		this.description = description;
 		this.price = value;
 		this.date = date;
 		this.necessaryExpense = necessaryExpense;
+		this.financialPlanning = financialPlanning;
 	}
 
 	public Long getId() {
@@ -101,7 +109,14 @@ public class Expense implements Serializable {
 	public List<UserExpense> getUsers() {
 		return users;
 	}
+	
+	public FinancialPlanning getFinancialPlanning() {
+		return financialPlanning;
+	}
 
+	public void setFinancialPlanning(FinancialPlanning financialPlanning) {
+		this.financialPlanning = financialPlanning;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

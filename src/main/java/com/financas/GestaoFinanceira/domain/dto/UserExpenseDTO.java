@@ -34,5 +34,5 @@ public class UserExpenseDTO {
 	
 	public Double getSubTotal() {
 		return quantity * expense.getPrice();
-	}    
+	}	
 }

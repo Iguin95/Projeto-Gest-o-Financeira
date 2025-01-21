@@ -66,12 +66,11 @@ public class TestConfiguration implements CommandLineRunner {
 		user2.getFinancialPlanning().addAll(Arrays.asList(fp2));
 		userRepository.saveAll(Arrays.asList(user1, user2));
 		
-		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false);
-		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false);
-		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true);
+		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false, fp1);
+		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false, fp3);
+		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true, fp2);
 		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
 		
-		//cada despesa de usuario tem que ter o seu proprio planejamento
 		UserExpense ue1 = new UserExpense(ex1, user1, 4);
 		UserExpense ue2 = new UserExpense(ex2, user1, 1);
 		UserExpense ue3 = new UserExpense(ex3, user2, 2);
