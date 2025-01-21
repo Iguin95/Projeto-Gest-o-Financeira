@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.financas.GestaoFinanceira.domain.Report;
+import com.financas.GestaoFinanceira.domain.dto.min.FinancialPlanningMinExpenseDTO;
 
 public class ReportDTO {
 
 	private Long id;
 	
-	private List<FinancialPlanningDTO> financialPlannings = new ArrayList<>();
+	private List<FinancialPlanningMinExpenseDTO> financialPlannings = new ArrayList<>();
 	
 	public ReportDTO() {
 	}
@@ -18,7 +19,7 @@ public class ReportDTO {
 		this.id = entity.getId();
 		
 		if (entity.getUser().getFinancialPlanning() != null) {
-            entity.getUser().getFinancialPlanning().forEach(fp -> this.financialPlannings.add(new FinancialPlanningDTO(fp)));
+            entity.getUser().getFinancialPlanning().forEach(fp -> this.financialPlannings.add(new FinancialPlanningMinExpenseDTO(fp)));
         }
 	}
 
@@ -30,7 +31,7 @@ public class ReportDTO {
 		this.id = id;
 	}
 
-	public List<FinancialPlanningDTO> getFinancialPlannings() {
+	public List<FinancialPlanningMinExpenseDTO> getFinancialPlannings() {
 		return financialPlannings;
 	}
 }

@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.Expense;
-import com.financas.GestaoFinanceira.domain.dto.min.FinancialPlanningMinDTO;
 
 public class ExpenseDTO {
 
@@ -15,16 +14,11 @@ public class ExpenseDTO {
 	private LocalDate date;
 	private Boolean necessaryExpense;
 	
-    private FinancialPlanningMinDTO financialPlanning;
-	
 	public ExpenseDTO(){
 	}
 	
 	public ExpenseDTO(Expense entity) {
 		BeanUtils.copyProperties(entity, this);
-		if (entity.getFinancialPlanning() != null) {
-            this.financialPlanning = new FinancialPlanningMinDTO(entity.getFinancialPlanning());
-        }
 	}
 
 	public Long getId() {
@@ -66,12 +60,4 @@ public class ExpenseDTO {
 	public void setNecessaryExpense(Boolean necessaryExpense) {
 		this.necessaryExpense = necessaryExpense;
 	}
-	
-	public FinancialPlanningMinDTO getFinancialPlanning() {
-		return financialPlanning;
-	}
-
-	public void setFinancialPlanning(FinancialPlanningMinDTO financialPlanning) {
-		this.financialPlanning = financialPlanning;
-	} 
 }
