@@ -1,16 +1,13 @@
 package com.financas.GestaoFinanceira.domain.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.financas.GestaoFinanceira.domain.Report;
-import com.financas.GestaoFinanceira.domain.dto.min.FinancialPlanningMinExpenseDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
 
 public class ReportDTO {
 
 	private Long id;
 	
-	private List<FinancialPlanningMinExpenseDTO> financialPlannings = new ArrayList<>();
+	private UserMinWithListDTO user;
 	
 	public ReportDTO() {
 	}
@@ -18,9 +15,9 @@ public class ReportDTO {
 	public ReportDTO(Report entity) {
 		this.id = entity.getId();
 		
-		if (entity.getUser().getFinancialPlanning() != null) {
-            entity.getUser().getFinancialPlanning().forEach(fp -> this.financialPlannings.add(new FinancialPlanningMinExpenseDTO(fp)));
-        }
+		if (entity.getUser() != null) {
+			this.user = new UserMinWithListDTO(entity.getUser());
+		}
 	}
 
 	public Long getId() {
@@ -31,7 +28,7 @@ public class ReportDTO {
 		this.id = id;
 	}
 
-	public List<FinancialPlanningMinExpenseDTO> getFinancialPlannings() {
-		return financialPlannings;
+	public UserMinWithListDTO getUsers() {
+		return user;
 	}
 }

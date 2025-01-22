@@ -59,10 +59,9 @@ public class FinancialPlanningMinExpenseDTO {
 	}
 	
 	public Double getSubTotal() {
-	    // Retorna o somatório dos valores de todas as despesas
 	    return expenses.stream()
-	                   .mapToDouble(ExpenseDTO::getPrice) // Mapeia para os valores
-	                   .sum(); // Soma os valores
+	                   .mapToDouble(ExpenseDTO::getPrice) 
+	                   .sum(); 
 	}
 }
 

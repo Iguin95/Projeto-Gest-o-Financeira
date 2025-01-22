@@ -1,19 +1,14 @@
 package com.financas.GestaoFinanceira.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -26,13 +21,6 @@ public class Report implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonIgnoreProperties("reports")
-	@ManyToMany
-	@JoinTable(name = "Report_Financial_Tb",
-	joinColumns = @JoinColumn(name = "id_report"),
-	inverseJoinColumns = @JoinColumn(name = "id_financialPlanning"))
-	private List<FinancialPlanning> financialPlannings = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
@@ -60,10 +48,6 @@ public class Report implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public List<FinancialPlanning> getFinancialPlannings() {
-		return financialPlannings;
 	}
 	
 	@Override
