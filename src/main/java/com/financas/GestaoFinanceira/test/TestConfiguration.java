@@ -69,19 +69,22 @@ public class TestConfiguration implements CommandLineRunner {
 		Expense ex1 = new Expense(null, "Iorgute", 13.99, LocalDate.parse("10/12/2024", fmt1), false, fp1);
 		Expense ex2 = new Expense(null, "RTX 2080", 1800.99, LocalDate.parse("19/10/2022", fmt1), false, fp3);
 		Expense ex3 = new Expense(null, "Arroz 5kg", 31.98, LocalDate.parse("28/11/2024", fmt1), true, fp2);
-		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
+		Expense ex4 = new Expense(null, "AMD Ryzen 7", 1500.99, LocalDate.parse("02/08/2023", fmt1), true, fp3);
+		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3, ex4));
 		
 		UserExpense ue1 = new UserExpense(ex1, user1, 4);
 		UserExpense ue2 = new UserExpense(ex2, user1, 1);
 		UserExpense ue3 = new UserExpense(ex3, user2, 2);
+		UserExpense ue4 = new UserExpense(ex4, user1, 1);
 		
-		user1.getUserExpenses().addAll(Arrays.asList(ue1, ue2));
+		user1.getUserExpenses().addAll(Arrays.asList(ue1, ue2, ue4));
 		user2.getUserExpenses().addAll(Arrays.asList(ue3));
 		
 		ex1.getUsers().addAll(Arrays.asList(ue1));
 		ex2.getUsers().addAll(Arrays.asList(ue2));
 		ex3.getUsers().addAll(Arrays.asList(ue3));
-		userExpenseRepository.saveAll(Arrays.asList(ue1, ue2, ue3));
+		ex4.getUsers().addAll(Arrays.asList(ue4));
+		userExpenseRepository.saveAll(Arrays.asList(ue1, ue2, ue3, ue4));
 		
 		Category cat1 = new Category(null, "Informática", 500.00);
 		Category cat2 = new Category(null, "Alimentação", 850.00);
@@ -90,9 +93,10 @@ public class TestConfiguration implements CommandLineRunner {
 		ex1.getCategories().addAll(Arrays.asList(cat2));
 		ex2.getCategories().addAll(Arrays.asList(cat1));
 		ex3.getCategories().addAll(Arrays.asList(cat2));
-		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3));
+		ex3.getCategories().addAll(Arrays.asList(cat1));
+		expenseRepository.saveAll(Arrays.asList(ex1, ex2, ex3, ex4));
 		
-		cat1.getExpenses().addAll(Arrays.asList(ex1, ex2));
+		cat1.getExpenses().addAll(Arrays.asList(ex1, ex2, ex4));
 		cat2.getExpenses().addAll(Arrays.asList(ex3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
 		

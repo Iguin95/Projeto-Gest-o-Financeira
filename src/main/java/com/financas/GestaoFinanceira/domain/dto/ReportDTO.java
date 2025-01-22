@@ -1,13 +1,13 @@
 package com.financas.GestaoFinanceira.domain.dto;
 
 import com.financas.GestaoFinanceira.domain.Report;
-import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.UserWithPlanningMinDTO;
 
 public class ReportDTO {
 
 	private Long id;
 	
-	private UserMinWithListDTO user;
+	private UserWithPlanningMinDTO user;
 	
 	public ReportDTO() {
 	}
@@ -16,7 +16,7 @@ public class ReportDTO {
 		this.id = entity.getId();
 		
 		if (entity.getUser() != null) {
-			this.user = new UserMinWithListDTO(entity.getUser());
+			this.user = new UserWithPlanningMinDTO(entity.getUser());
 		}
 	}
 
@@ -28,7 +28,7 @@ public class ReportDTO {
 		this.id = id;
 	}
 
-	public UserMinWithListDTO getUsers() {
+	public UserWithPlanningMinDTO getUsers() {
 		return user;
 	}
 }

@@ -20,7 +20,6 @@ public class CategoryWithListMinDTO {
 
 	public CategoryWithListMinDTO(Category result) {
 		BeanUtils.copyProperties(result, this); // não copia dados contidos em listas
-		// Convertendo cada Expense para ExpenseDTO
 		if (result.getExpenses() != null) {
 			result.getExpenses().forEach(expense -> this.expenses.add(new ExpenseMinDTO(expense)));
 		}

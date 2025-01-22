@@ -57,12 +57,6 @@ public class FinancialPlanningMinExpenseDTO {
 	public Double getDesiredSavings() {
 		return monthlyGoal * 12;
 	}
-	
-	public Double getSubTotal() {
-	    return expenses.stream()
-	                   .mapToDouble(ExpenseDTO::getPrice) 
-	                   .sum(); 
-	}
 }
 
 
