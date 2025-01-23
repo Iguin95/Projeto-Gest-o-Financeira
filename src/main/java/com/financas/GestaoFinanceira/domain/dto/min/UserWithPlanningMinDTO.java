@@ -1,7 +1,7 @@
 package com.financas.GestaoFinanceira.domain.dto.min;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 
@@ -12,7 +12,7 @@ public class UserWithPlanningMinDTO {
 	private Long id;
 	private String name;
 	
-	private List<UserExpenseWithPlanningMinDTO> userExpenses = new ArrayList<>();
+	private Set<UserExpenseWithPlanningMinDTO> userExpenses = new HashSet<>();
 
 	public UserWithPlanningMinDTO() {
 	}
@@ -41,7 +41,7 @@ public class UserWithPlanningMinDTO {
 		this.name = name;
 	}
 
-	public List<UserExpenseWithPlanningMinDTO> getUserExpenses() {
+	public Set<UserExpenseWithPlanningMinDTO> getUserExpenses() {
 		return userExpenses;
 	}	
 }

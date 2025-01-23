@@ -3,7 +3,9 @@ package com.financas.GestaoFinanceira.domain.dto;
 import org.springframework.beans.BeanUtils;
 
 import com.financas.GestaoFinanceira.domain.FinancialPlanning;
+import com.financas.GestaoFinanceira.domain.dto.min.UserExpenseWithPlanningMinDTO;
 import com.financas.GestaoFinanceira.domain.dto.min.UserMinWithListDTO;
+import com.financas.GestaoFinanceira.domain.dto.min.UserWithPlanningMinDTO;
 
 public class FinancialPlanningDTO {
 
@@ -11,7 +13,7 @@ public class FinancialPlanningDTO {
 	private Double annualGoal;
 	private Double monthlyGoal;
 
-	private UserMinWithListDTO user;
+	private UserWithPlanningMinDTO user;
 
 	public FinancialPlanningDTO() {
 	}
@@ -19,7 +21,7 @@ public class FinancialPlanningDTO {
 	public FinancialPlanningDTO(FinancialPlanning entity) {
 		BeanUtils.copyProperties(entity, this);
 		if (entity.getUser() != null) {
-			this.user = new UserMinWithListDTO(entity.getUser());
+			this.user = new UserWithPlanningMinDTO(entity.getUser());
 		}
 	}
 
@@ -47,11 +49,11 @@ public class FinancialPlanningDTO {
 		this.monthlyGoal = monthlyGoal;
 	}
 
-	public UserMinWithListDTO getUser() {
+	public UserWithPlanningMinDTO getUser() {
 		return user;
 	}
 
-	public void setUser(UserMinWithListDTO user) {
+	public void setUser(UserWithPlanningMinDTO user) {
 		this.user = user;
 	}
 
@@ -64,7 +66,7 @@ public class FinancialPlanningDTO {
 			return 0.0;
 		}
 		// Calcula o total somando os subtotais de cada UserExpenseDTO
-		return user.getUserExpenses().stream().mapToDouble(UserExpenseDTO::getSubTotal) // Chama o método getSubTotal
+		return user.getUserExpenses().stream().mapToDouble(UserExpenseWithPlanningMinDTO::getSubTotal) // Chama o método getSubTotal
 				.sum();
 	}
 }
